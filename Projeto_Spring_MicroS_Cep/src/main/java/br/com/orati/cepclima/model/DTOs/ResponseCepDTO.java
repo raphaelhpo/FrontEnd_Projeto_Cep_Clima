@@ -1,8 +1,11 @@
 package br.com.orati.cepclima.model.DTOs;
 
-public record ResponseCepDTO(
-                String cep,
-                String latitude,
-                String longitude) {
+import lombok.Data;
+import lombok.Setter;
 
+@Data
+public class ResponseCepDTO {
+    String cep;
+    String latitude;
+    String longitude;
 }

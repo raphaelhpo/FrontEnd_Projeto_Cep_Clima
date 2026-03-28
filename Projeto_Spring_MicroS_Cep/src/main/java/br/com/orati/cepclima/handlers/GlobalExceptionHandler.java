@@ -48,4 +48,16 @@ public class GlobalExceptionHandler {
         RestErrorResponseDTO response = new RestErrorResponseDTO("NOT_FOUND", status);
         return ResponseEntity.status(status).body(response);
     }
+
+    /**
+     * 
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<RestErrorResponseDTO> handlerExcpetionGeneric(Exception ex) {
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        RestErrorResponseDTO response = new RestErrorResponseDTO("Erro interno do servidor.", status);
+        return ResponseEntity.status(status).body(response);
+    }
 }

@@ -1,5 +1,7 @@
 package br.com.orati.cepclima.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import br.com.orati.cepclima.exceptions.CepInvalidoException;
@@ -30,15 +32,23 @@ public class CepService {
      */
     public ResponseCepDTO create(CreateCepDTO cepDTO) {
         try {
-            Cep dadosCep = apiService.buscarDadosCep(cepDTO.cep());
-            repository.save(dadosCep);
+            Cep dadosCepApi = apiService.buscarDadosCep(cepDTO.cep());
+            Optional<Cep> PosiveisDadosCepDb = repository.findByCep(cepDTO.cep());
+            ResponseCepDTO response = new ResponseCepDTO();
+            if (PosiveisDadosCepDb.isEmpty()) {
+                repository.save(dadosCepApi);
+                response.setCep(dadosCepApi.getCep());
+                response.setLatitude(dadosCepApi.getLatitude());
+                response.setLongitude(dadosCepApi.getLongitude());
+            } else {
+                Cep dadosCepDb = PosiveisDadosCepDb.get();
+                response.setCep(dadosCepDb.getCep());
+                response.setLatitude(dadosCepDb.getLatitude());
+                response.setLongitude(dadosCepDb.getLongitude());
+            }
             if (cepDTO == null || cepDTO.cep() == null) {
                 throw new CepVazioException("CEP Vazio.");
             }
-            ResponseCepDTO response = new ResponseCepDTO(
-                    dadosCep.getCep(),
-                    dadosCep.getLatitude(),
-                    dadosCep.getLongitude());
             return response;
         } catch (FeignException e) {
             throw new CepInvalidoException("CEP Inválido" + e);
