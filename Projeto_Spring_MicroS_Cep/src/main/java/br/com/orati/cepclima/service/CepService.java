@@ -4,13 +4,13 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import br.com.orati.cepclima.client.CepApiService;
 import br.com.orati.cepclima.exceptions.CepInvalidoException;
 import br.com.orati.cepclima.exceptions.CepVazioException;
 import br.com.orati.cepclima.model.Cep;
 import br.com.orati.cepclima.model.DTOs.CreateCepDTO;
 import br.com.orati.cepclima.model.DTOs.ResponseCepDTO;
 import br.com.orati.cepclima.repository.CepRepository;
-import br.com.orati.cepclima.service.API.CepApiService;
 import feign.FeignException;
 
 @Service

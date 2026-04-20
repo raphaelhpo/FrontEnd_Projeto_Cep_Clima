@@ -1,4 +1,4 @@
-package br.com.orati.cepclima.service.API;
+package br.com.orati.cepclima.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
