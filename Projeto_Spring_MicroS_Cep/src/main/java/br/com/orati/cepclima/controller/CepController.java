@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.orati.cepclima.model.DTOs.CreateCepDTO;
-import br.com.orati.cepclima.model.DTOs.ResponseCepDTO;
+import br.com.orati.cepclima.dto.create.CreateCepDTO;
+import br.com.orati.cepclima.dto.response.ResponseDTO;
 import br.com.orati.cepclima.service.CepService;
 
 @RestController
@@ -28,8 +28,8 @@ public class CepController {
      * @return
      */
     @PostMapping("/{cep}")
-    public ResponseEntity<ResponseCepDTO> postMethodName(@PathVariable CreateCepDTO cep) {
-        ResponseCepDTO retorno = service.create(cep);
+    public ResponseEntity<ResponseDTO> postMethodName(@PathVariable("cep") String cep) {
+        ResponseDTO retorno = service.create(cep);
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
 
