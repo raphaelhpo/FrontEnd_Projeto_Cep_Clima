@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
+import br.com.orati.cepclima.dto.response.RestErrorResponseDTO;
 import br.com.orati.cepclima.exceptions.CepInvalidoException;
 import br.com.orati.cepclima.exceptions.CepVazioException;
-import br.com.orati.cepclima.model.DTOs.RestErrorResponseDTO;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
