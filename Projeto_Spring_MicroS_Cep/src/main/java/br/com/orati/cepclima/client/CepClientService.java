@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import br.com.orati.cepclima.dto.create.CreateCepDTO;
 
-@FeignClient(name = "cep", url = "${service.clima.url}")
+@FeignClient(name = "cep", url = "https://cep.awesomeapi.com.br")
 public interface CepClientService {
 
     @GetMapping("/json/{cep}")

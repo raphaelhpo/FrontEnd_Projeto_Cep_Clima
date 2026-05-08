@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.orati.cepclima.dto.create.CreateClimaDTO;
 
-@FeignClient(name = "Consulta-de-clima", url = "http://localhost:8081")
+@FeignClient(name = "Consulta-de-clima", url = "${service.clima.url}")
 public interface ClimaClientService {
 
     @GetMapping("/api/clima")

@@ -32,16 +32,29 @@ public class CepService {
     }
 
     // TODO: Criar Exception Expecífica para FeingException
+    /**
+     * Realiza a chamada da API para busca dados do CEP.
+     * 
+     * @param cepDTO
+     * @return
+     */
     private CreateCepDTO buscarDadosCepApi(CreateCepDTO cepDTO) {
         return cepClientService.buscarDadosCep(cepDTO.getCep());
     }
 
+    /**
+     * Realiza a chamada da API para consulta o Clima.
+     * 
+     * @param cepDTO
+     * @return
+     */
     private CreateClimaDTO buscarDadosClimaApi(CreateCepDTO cepDTO) {
         return climaClientService.buscarDadosClima(Double.valueOf(cepDTO.getLatitude()),
                 Double.valueOf(cepDTO.getLongitude()));
     }
 
     /**
+     * Realiza a busca do CEP no banco de dados utilizando repository.
      * 
      * @param cepDTO
      * @return
@@ -51,6 +64,7 @@ public class CepService {
     }
 
     /**
+     * Salva os dados no banco utilizando o repository.
      * 
      * @param cep
      */
@@ -59,6 +73,7 @@ public class CepService {
     }
 
     /**
+     * Valida a situação do objetoDTO e do CEP (se ambos ou algum está nulo).
      * 
      * @param cepDTO
      * @return
@@ -72,6 +87,7 @@ public class CepService {
     }
 
     /**
+     * Mapeia a criação de um novo objeto ResponseDTO
      * 
      * @param cep
      * @return
@@ -80,6 +96,12 @@ public class CepService {
         return new ResponseDTO(cep, clima);
     }
 
+    /**
+     * Mapeaia a criação de um novo objeto CreateDTO.
+     * 
+     * @param cep
+     * @return
+     */
     private CreateCepDTO mapperCreateCepDTO(Cep cep) {
         return new CreateCepDTO(
                 cep.getCep(),
@@ -93,6 +115,7 @@ public class CepService {
     }
 
     /**
+     * Cria o objeto de retorno para a consulta de solicitada.
      * 
      * @param cepDTO
      * @return
@@ -109,7 +132,7 @@ public class CepService {
                         salvarNoBanco(cepApi.toEntity());
                         return cepApi;
                     });
-            return new ResponseDTO(dadosCep, buscarDadosClimaApi(dadosCep));
+            return this.mapperResponseDTO(dadosCep, buscarDadosClimaApi(dadosCep));
         } catch (FeignException e) {
             throw new CepInvalidoException("CEP Inválido\n" + e);
         }
