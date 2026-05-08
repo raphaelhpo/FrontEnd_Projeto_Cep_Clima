@@ -1,4 +1,4 @@
-package br.com.orati.cepclima.model.DTOs;
+package br.com.orati.cepclima.dto.response;
 
 import org.springframework.http.HttpStatus;
 

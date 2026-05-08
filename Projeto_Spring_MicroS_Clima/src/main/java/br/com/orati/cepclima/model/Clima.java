@@ -23,5 +23,5 @@ public class Clima {
         Float temperatura;
         Float sensacaoTermica;
         Integer condicaoClimatica;
-        Integer velocidadeVento;
+        Float velocidadeVento;
 }
