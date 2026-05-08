@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 import br.com.orati.cepclima.model.Clima;
 
 @Repository
-public interface ClimaRepository extends JpaRepository<UUID, Clima> {
-
+public interface ClimaRepository extends JpaRepository<Clima, UUID> {
 }
