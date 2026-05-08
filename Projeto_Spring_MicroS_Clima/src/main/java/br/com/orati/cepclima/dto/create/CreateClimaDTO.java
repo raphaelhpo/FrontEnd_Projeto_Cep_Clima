@@ -1,7 +1,9 @@
-package br.com.orati.cepclima.dto;
+package br.com.orati.cepclima.dto.create;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 
+import br.com.orati.cepclima.dto.CurrentDTO;
+import br.com.orati.cepclima.dto.response.ResponseClimaDTO;
 import br.com.orati.cepclima.model.Clima;
 
 public record CreateClimaDTO(

@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.orati.cepclima.dto.CreateClimaDTO;
-import br.com.orati.cepclima.dto.CreateCoordenadasDTO;
-import br.com.orati.cepclima.dto.ResponseClimaDTO;
+import br.com.orati.cepclima.dto.create.CreateClimaDTO;
+import br.com.orati.cepclima.dto.create.CreateCoordenadasDTO;
+import br.com.orati.cepclima.dto.response.ResponseClimaDTO;
 import br.com.orati.cepclima.service.ClimaService;
 
 @RestController

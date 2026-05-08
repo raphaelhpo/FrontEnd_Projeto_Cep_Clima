@@ -6,8 +6,8 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import br.com.orati.cepclima.client.ClimaApiService;
-import br.com.orati.cepclima.dto.CreateClimaDTO;
-import br.com.orati.cepclima.dto.CreateCoordenadasDTO;
+import br.com.orati.cepclima.dto.create.CreateClimaDTO;
+import br.com.orati.cepclima.dto.create.CreateCoordenadasDTO;
 import br.com.orati.cepclima.model.Clima;
 import br.com.orati.cepclima.repository.ClimaRepository;
 

@@ -1,4 +1,4 @@
-package br.com.orati.cepclima.dto;
+package br.com.orati.cepclima.dto.response;
 
 import java.time.LocalDateTime;
 
