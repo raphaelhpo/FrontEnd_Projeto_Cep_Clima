@@ -1,8 +1,10 @@
 package br.com.orati.cepclima.service;
 
+import java.lang.module.FindException;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.com.orati.cepclima.client.ClimaApiService;
@@ -10,6 +12,7 @@ import br.com.orati.cepclima.dto.create.CreateClimaDTO;
 import br.com.orati.cepclima.dto.create.CreateCoordenadasDTO;
 import br.com.orati.cepclima.model.Clima;
 import br.com.orati.cepclima.repository.ClimaRepository;
+import feign.FeignException;
 
 @Service
 public class ClimaService {
@@ -23,12 +26,10 @@ public class ClimaService {
     }
 
     // TODO: Incluir tratamento de erros com Exception
-    // [ ]: Buscar por lat,long e data se já foi feita a consulta no DB
-    public Optional<Clima> buscarClimaExistente(UUID id) {
-        return repository.findById(id);
+    public Clima buscarClimaExistente(UUID id) {
+        return repository.findById(id).orElseThrow(() -> new FindException("Erro ao buscar ID."));
     }
 
-    // TODO: Incluir tratamento de erros com Exception
     public Clima salvarClima(Clima clima) {
         return repository.save(clima);
     }
@@ -40,7 +41,6 @@ public class ClimaService {
         CreateClimaDTO reponseClimaClient = clientService.buscarDadosClima(
                 coordenadasDTO.latitude().toString(),
                 coordenadasDTO.longitude().toString());
-
         return reponseClimaClient;
     }
 

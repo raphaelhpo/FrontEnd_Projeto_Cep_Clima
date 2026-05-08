@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import br.com.orati.cepclima.dto.ExceptionFormatDTO;
 import br.com.orati.cepclima.exceptions.CoordenadasInvalidasException;
 import br.com.orati.cepclima.exceptions.FindIdException;
+import feign.FeignException;
 
 @RestControllerAdvice
 public class GlobalHandlerException {
@@ -22,6 +23,13 @@ public class GlobalHandlerException {
     public ResponseEntity<ExceptionFormatDTO> findIdException(FindIdException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ExceptionFormatDTO(HttpStatus.BAD_REQUEST, ex.getMessage()));
+    }
+
+    @ExceptionHandler(FeignException.class)
+    public ResponseEntity<ExceptionFormatDTO> feignException(FeignException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ExceptionFormatDTO(HttpStatus.BAD_REQUEST, "Erro ao chamar API clima."));
     }
 
     @ExceptionHandler(Exception.class)
