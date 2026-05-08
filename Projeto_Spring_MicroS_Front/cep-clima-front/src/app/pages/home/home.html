@@ -1,0 +1,11 @@
+<div class="page">
+    <app-header />
+    <main class="container">
+        <app-search-bar (resultado)="onResultado($event)" />
+
+        @if (resultado) {
+        <app-address-card [dados]="resultado.cep" />
+        <app-weather-card [dados]="resultado.clima" />
+        }
+    </main>
+</div>

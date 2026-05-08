@@ -1,0 +1,37 @@
+<div class="card">
+    <div class="card-header">
+        <div class="card-label">
+            <span class="dot"></span>
+            Clima atual
+        </div>
+        <span class="timestamp">{{ dados.data | date:'dd/MM/yyyy · HH:mm' }}</span>
+    </div>
+
+    <div class="metrics-grid">
+        <div class="metric">
+            <p class="metric-label">Temperatura</p>
+            <div class="metric-value">
+                {{ dados.temperatura }} <span class="metric-unit">°C</span>
+            </div>
+        </div>
+
+        <div class="metric">
+            <p class="metric-label">Sensação térmica</p>
+            <div class="metric-value">
+                {{ dados.sensacaoTermica }} <span class="metric-unit">°C</span>
+            </div>
+        </div>
+
+        <div class="metric">
+            <p class="metric-label">Vento</p>
+            <div class="metric-value">
+                {{ dados.velocidadeVento }} <span class="metric-unit">km/h</span>
+            </div>
+        </div>
+
+        <div class="metric">
+            <p class="metric-label">Condição climática</p>
+            <div class="metric-value small">cód. {{ dados.condicaoClimatica }}</div>
+        </div>
+    </div>
+</div>
