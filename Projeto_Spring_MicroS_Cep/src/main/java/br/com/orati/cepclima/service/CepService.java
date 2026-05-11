@@ -49,7 +49,8 @@ public class CepService {
      * @return
      */
     private CreateClimaDTO buscarDadosClimaApi(CreateCepDTO cepDTO) {
-        return climaClientService.buscarDadosClima(Double.valueOf(cepDTO.getLatitude()),
+        return climaClientService.buscarDadosClima(
+                Double.valueOf(cepDTO.getLatitude()),
                 Double.valueOf(cepDTO.getLongitude()));
     }
 
@@ -132,6 +133,7 @@ public class CepService {
                         salvarNoBanco(cepApi.toEntity());
                         return cepApi;
                     });
+            System.err.println(dadosCep.getLatitude() + " " + dadosCep.getLongitude());
             return this.mapperResponseDTO(dadosCep, buscarDadosClimaApi(dadosCep));
         } catch (FeignException e) {
             throw new CepInvalidoException("CEP Inválido\n" + e);
