@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.orati.cepclima.client.CepClientService;
 import br.com.orati.cepclima.client.ClimaClientService;
+import br.com.orati.cepclima.dto.create.Coordinates;
 import br.com.orati.cepclima.dto.create.CreateCepDTO;
 import br.com.orati.cepclima.dto.create.CreateClimaDTO;
+import br.com.orati.cepclima.dto.create.Location;
 import br.com.orati.cepclima.dto.response.ResponseDTO;
 import br.com.orati.cepclima.exceptions.CepInvalidoException;
 import br.com.orati.cepclima.exceptions.CepVazioException;
@@ -49,8 +51,8 @@ public class CepService {
      * @return
      */
     private CreateClimaDTO buscarDadosClimaApi(CreateCepDTO cepDTO) {
-        return climaClientService.buscarDadosClima(Double.valueOf(cepDTO.getLatitude()),
-                Double.valueOf(cepDTO.getLongitude()));
+        return climaClientService.buscarDadosClima(Double.valueOf(cepDTO.getLocation().getCoordinates().getLatitude()),
+                Double.valueOf(cepDTO.getLocation().getCoordinates().getLongitude()));
     }
 
     /**
@@ -105,13 +107,15 @@ public class CepService {
     private CreateCepDTO mapperCreateCepDTO(Cep cep) {
         return new CreateCepDTO(
                 cep.getCep(),
-                cep.getLogradouroCompleto(),
                 cep.getUf(),
-                cep.getBairro(),
-                cep.getLatitude(),
-                cep.getLongitude(),
                 cep.getCidade(),
-                cep.getDdd());
+                cep.getBairro(),
+                cep.getLogradouroCompleto(),
+                new Location(
+                        "Point",
+                        new Coordinates(
+                                cep.getLongitude(),
+                                cep.getLatitude())));
     }
 
     /**
@@ -134,6 +138,8 @@ public class CepService {
                     });
             return this.mapperResponseDTO(dadosCep, buscarDadosClimaApi(dadosCep));
         } catch (FeignException e) {
+            System.err.println("Erro na API Externa: " + e.contentUTF8());
+            System.err.println("Status da API Externa: " + e.status());
             throw new CepInvalidoException("CEP Inválido\n" + e);
         }
     }

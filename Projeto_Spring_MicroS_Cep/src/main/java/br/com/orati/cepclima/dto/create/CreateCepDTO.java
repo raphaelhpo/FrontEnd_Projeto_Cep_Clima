@@ -14,19 +14,15 @@ import lombok.Setter;
 @Setter
 public class CreateCepDTO {
     String cep;
-    @JsonAlias("address")
-    String logradouroCompleto;
     @JsonAlias("state")
     String uf;
-    @JsonAlias("district")
-    String bairro;
-    @JsonAlias("lat")
-    String latitude;
-    @JsonAlias("lng")
-    String longitude;
     @JsonAlias("city")
     String cidade;
-    String ddd;
+    @JsonAlias("neighborhood")
+    String bairro;
+    @JsonAlias("street")
+    String logradouroCompleto;
+    Location location;
 
     public Cep toEntity() {
         Cep cepObj = new Cep();
@@ -34,8 +30,8 @@ public class CreateCepDTO {
         cepObj.setLogradouroCompleto(logradouroCompleto);
         cepObj.setUf(uf);
         cepObj.setBairro(bairro);
-        cepObj.setLatitude(latitude);
-        cepObj.setLongitude(longitude);
+        cepObj.setLatitude(location.getCoordinates().getLatitude());
+        cepObj.setLongitude(location.getCoordinates().getLongitude());
         cepObj.setCidade(cidade);
         return cepObj;
     }

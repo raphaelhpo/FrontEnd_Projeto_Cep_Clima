@@ -12,5 +12,4 @@ import lombok.Setter;
 public class RestErrorResponseDTO {
     String message;
     HttpStatus status;
-    String stackTrace;
 }
