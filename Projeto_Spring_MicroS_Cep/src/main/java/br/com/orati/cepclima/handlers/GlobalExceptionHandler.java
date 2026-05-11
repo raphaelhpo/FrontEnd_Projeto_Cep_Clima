@@ -1,5 +1,8 @@
 package br.com.orati.cepclima.handlers;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,8 +24,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CepInvalidoException.class)
     public ResponseEntity<RestErrorResponseDTO> handlerCepInvalido(CepInvalidoException ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
-        RestErrorResponseDTO response = new RestErrorResponseDTO("CEP inválido.", status,
-                ex.getStackTrace().toString());
+        String stackTrace = Arrays.stream(ex.getStackTrace())
+                .map(StackTraceElement::toString)
+                .collect(Collectors.joining("\n"));
+        RestErrorResponseDTO response = new RestErrorResponseDTO("CEP inválido.", status, stackTrace);
         return ResponseEntity.status(status).body(response);
     }
 
@@ -34,8 +39,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CepVazioException.class)
     public ResponseEntity<RestErrorResponseDTO> handlerCepVazio(CepVazioException ex) {
         HttpStatus status = HttpStatus.NOT_FOUND;
-        RestErrorResponseDTO response = new RestErrorResponseDTO("CEP Vazio.", status,
-                ex.getStackTrace().toString());
+        String stackTrace = Arrays.stream(ex.getStackTrace())
+                .map(StackTraceElement::toString)
+                .collect(Collectors.joining("\n"));
+        RestErrorResponseDTO response = new RestErrorResponseDTO("CEP Vazio.", status, stackTrace);
         return ResponseEntity.status(status).body(response);
     }
 
@@ -47,8 +54,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoResourceFoundException.class)
     public ResponseEntity<RestErrorResponseDTO> handlerRotaNaoEncontrada(NoResourceFoundException ex) {
         HttpStatus status = HttpStatus.NOT_FOUND;
-        RestErrorResponseDTO response = new RestErrorResponseDTO("NOT_FOUND", status,
-                ex.getStackTrace().toString());
+        String stackTrace = Arrays.stream(ex.getStackTrace())
+                .map(StackTraceElement::toString)
+                .collect(Collectors.joining("\n"));
+        RestErrorResponseDTO response = new RestErrorResponseDTO("NOT_FOUND", status, stackTrace);
         return ResponseEntity.status(status).body(response);
     }
 
@@ -60,8 +69,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<RestErrorResponseDTO> handlerExcpetionGeneric(Exception ex) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        RestErrorResponseDTO response = new RestErrorResponseDTO("Erro interno do servidor.", status,
-                ex.getStackTrace().toString());
+        String stackTrace = Arrays.stream(ex.getStackTrace())
+                .map(StackTraceElement::toString)
+                .collect(Collectors.joining("\n"));
+        RestErrorResponseDTO response = new RestErrorResponseDTO("Erro interno do servidor.", status, stackTrace);
         return ResponseEntity.status(status).body(response);
     }
 }
