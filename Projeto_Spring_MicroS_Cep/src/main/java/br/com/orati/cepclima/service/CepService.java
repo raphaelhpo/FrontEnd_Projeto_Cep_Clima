@@ -31,7 +31,6 @@ public class CepService {
         this.climaClientService = climaClientService;
     }
 
-    // TODO: Criar Exception Expecífica para FeingException
     /**
      * Realiza a chamada da API para busca dados do CEP.
      * 
@@ -133,10 +132,12 @@ public class CepService {
                         salvarNoBanco(cepApi.toEntity());
                         return cepApi;
                     });
-            System.err.println(dadosCep.getLatitude() + " " + dadosCep.getLongitude());
+            System.err.println(buscarDadosCepApi(cepDTO));
             return this.mapperResponseDTO(dadosCep, buscarDadosClimaApi(dadosCep));
         } catch (FeignException e) {
-            throw new CepInvalidoException("CEP Inválido\n" + e);
+            System.err.println("Erro na API Externa: " + e.contentUTF8());
+            System.err.println("Status da API Externa: " + e.status());
+            throw new CepInvalidoException("CEP Inválido\n" + e.getMessage());
         }
     }
 

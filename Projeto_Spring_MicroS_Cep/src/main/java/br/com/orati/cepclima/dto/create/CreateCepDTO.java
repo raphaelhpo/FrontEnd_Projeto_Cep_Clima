@@ -1,30 +1,33 @@
 package br.com.orati.cepclima.dto.create;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.orati.cepclima.model.Cep;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class CreateCepDTO {
     String cep;
-    @JsonAlias("address")
+    @JsonProperty("address")
     String logradouroCompleto;
-    @JsonAlias("state")
+    @JsonProperty("state")
     String uf;
-    @JsonAlias("district")
+    @JsonProperty("district")
     String bairro;
-    @JsonAlias("lat")
+    @JsonProperty("lat")
     String latitude;
-    @JsonAlias("lng")
+    @JsonProperty("lng")
     String longitude;
-    @JsonAlias("city")
+    @JsonProperty("city")
     String cidade;
     String ddd;
 
@@ -37,6 +40,7 @@ public class CreateCepDTO {
         cepObj.setLatitude(latitude);
         cepObj.setLongitude(longitude);
         cepObj.setCidade(cidade);
+        cepObj.setDdd(ddd);
         return cepObj;
     }
 
