@@ -4,8 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,8 +28,8 @@ public class CepController {
      * @param cep
      * @return
      */
-    @PostMapping("/{cep}")
-    public ResponseEntity<ResponseDTO> postMethodName(@PathVariable("cep") String cep) {
+    @GetMapping("/{cep}")
+    public ResponseEntity<ResponseDTO> getCep(@PathVariable("cep") String cep) {
         ResponseDTO retorno = service.create(cep);
         return ResponseEntity.status(HttpStatus.CREATED).body(retorno);
     }
