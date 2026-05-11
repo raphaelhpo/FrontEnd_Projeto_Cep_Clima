@@ -11,6 +11,6 @@ import feign.Headers;
 
 public interface CepClientService {
 
-    @GetMapping("/json/{cep}")
+    @GetMapping("/{cep}")
     public CreateCepDTO buscarDadosCep(@PathVariable("cep") String cep);
 }
