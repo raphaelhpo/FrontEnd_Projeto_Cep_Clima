@@ -134,6 +134,8 @@ public class CepService {
                     });
             return this.mapperResponseDTO(dadosCep, buscarDadosClimaApi(dadosCep));
         } catch (FeignException e) {
+            System.err.println("Erro na API Externa: " + e.contentUTF8());
+            System.err.println("Status da API Externa: " + e.status());
             throw new CepInvalidoException("CEP Inválido\n" + e);
         }
     }
