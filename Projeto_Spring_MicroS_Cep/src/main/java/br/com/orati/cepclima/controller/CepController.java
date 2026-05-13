@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.orati.cepclima.dto.response.ResponseDTO;
 import br.com.orati.cepclima.service.CepService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://projeto-spring-cep-clima-msg3-ds388nbct.vercel.app")
 @RestController
 @RequestMapping("/api/cep")
 @Validated
