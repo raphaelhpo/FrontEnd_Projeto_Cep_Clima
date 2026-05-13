@@ -14,8 +14,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@ngx-env/builder:browser",
+          "builder": "@ngx-env/builder:application",
           "options": {
+            "outputPath": "dist/cep-clima-front",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
