@@ -7,12 +7,13 @@
         <span class="cep-badge">CEP {{ dados.cep }}</span>
     </div>
 
-    <p class="address-main">{{ dados.logradouroCompleto }}</p>
-    <p class="address-sub">{{ dados.bairro }} · {{ dados.cidade }} · {{ dados.uf }} · DDD {{ dados.ddd }}</p>
+    <p class="address-main">{{ dados.logradouro }}</p>
+    <p class="address-sub">{{ dados.bairro }} · {{ dados.cidade.nome }} · {{ dados.estado.sigla }} · DDD {{
+        dados.cidade.ddd }}</p>
 
     <div class="badges">
-        <span class="badge accent">{{ dados.cidade }} · {{ dados.uf }}</span>
-        <span class="badge teal">DDD {{ dados.ddd }}</span>
+        <span class="badge accent">{{ dados.cidade.nome }} · {{ dados.estado.sigla }}</span>
+        <span class="badge teal">DDD {{ dados.cidade.ddd }}</span>
         <span class="badge">{{ dados.bairro }}</span>
     </div>
 
