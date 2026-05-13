@@ -1,12 +1,20 @@
 export interface CepModel {
     cep: string;
-    logradouroCompleto: string;
-    uf: string;
+    logradouro: string;
     bairro: string;
     latitude: string;
     longitude: string;
-    cidade: string;
+    CidadeModel: CidadeModel;
+    EstadoModel: EstadoModel;
+}
+
+export interface CidadeModel {
+    nome: string;
     ddd: string;
+}
+
+export interface EstadoModel {
+    sigla: string;
 }
 
 export interface ClimaModel {
