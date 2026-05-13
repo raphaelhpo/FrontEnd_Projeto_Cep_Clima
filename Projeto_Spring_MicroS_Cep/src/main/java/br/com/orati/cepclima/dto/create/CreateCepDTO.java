@@ -1,6 +1,6 @@
 package br.com.orati.cepclima.dto.create;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.com.orati.cepclima.model.Cep;
@@ -15,32 +15,32 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateCepDTO {
     String cep;
-    @JsonProperty("address")
+    @JsonProperty("logradouro")
     String logradouroCompleto;
-    @JsonProperty("state")
-    String uf;
-    @JsonProperty("district")
+    @JsonProperty("bairro")
     String bairro;
-    @JsonProperty("lat")
+    @JsonProperty("latitude")
     String latitude;
-    @JsonProperty("lng")
+    @JsonProperty("longitude")
     String longitude;
-    @JsonProperty("city")
-    String cidade;
-    String ddd;
+    @JsonProperty("cidade")
+    Cidade cidade;
+    @JsonProperty("estado")
+    Estado estado;
 
     public Cep toEntity() {
         Cep cepObj = new Cep();
         cepObj.setCep(cep);
         cepObj.setLogradouroCompleto(logradouroCompleto);
-        cepObj.setUf(uf);
+        cepObj.setUf(estado.getSigla());
         cepObj.setBairro(bairro);
         cepObj.setLatitude(latitude);
         cepObj.setLongitude(longitude);
-        cepObj.setCidade(cidade);
-        cepObj.setDdd(ddd);
+        cepObj.setCidade(cidade.getNome());
+        cepObj.setDdd(cidade.getDdd());
         return cepObj;
     }
 

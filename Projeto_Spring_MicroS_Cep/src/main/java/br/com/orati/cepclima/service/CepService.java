@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.orati.cepclima.client.CepClientService;
 import br.com.orati.cepclima.client.ClimaClientService;
+import br.com.orati.cepclima.dto.create.Cidade;
 import br.com.orati.cepclima.dto.create.CreateCepDTO;
 import br.com.orati.cepclima.dto.create.CreateClimaDTO;
+import br.com.orati.cepclima.dto.create.Estado;
 import br.com.orati.cepclima.dto.response.ResponseDTO;
 import br.com.orati.cepclima.exceptions.CepInvalidoException;
 import br.com.orati.cepclima.exceptions.CepVazioException;
@@ -32,7 +34,7 @@ public class CepService {
     }
 
     /**
-     * Realiza a chamada da API para busca dados do CEP.
+     * Realiza a chamada da API que buscar dados do CEP.
      * 
      * @param cepDTO
      * @return
@@ -42,7 +44,7 @@ public class CepService {
     }
 
     /**
-     * Realiza a chamada da API para consulta o Clima.
+     * Realiza a chamada da API que consulta o Clima.
      * 
      * @param cepDTO
      * @return
@@ -106,12 +108,11 @@ public class CepService {
         return new CreateCepDTO(
                 cep.getCep(),
                 cep.getLogradouroCompleto(),
-                cep.getUf(),
                 cep.getBairro(),
                 cep.getLatitude(),
                 cep.getLongitude(),
-                cep.getCidade(),
-                cep.getDdd());
+                new Cidade(cep.getDdd(), cep.getCidade()),
+                new Estado(cep.getUf()));
     }
 
     /**

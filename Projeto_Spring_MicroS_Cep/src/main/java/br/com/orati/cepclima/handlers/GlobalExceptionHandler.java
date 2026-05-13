@@ -12,6 +12,8 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 import br.com.orati.cepclima.dto.response.RestErrorResponseDTO;
 import br.com.orati.cepclima.exceptions.CepInvalidoException;
 import br.com.orati.cepclima.exceptions.CepVazioException;
+import feign.FeignException;
+import feign.FeignException.FeignClientException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -24,10 +26,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CepInvalidoException.class)
     public ResponseEntity<RestErrorResponseDTO> handlerCepInvalido(CepInvalidoException ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
-        String stackTrace = Arrays.stream(ex.getStackTrace())
-                .map(StackTraceElement::toString)
-                .collect(Collectors.joining("\n"));
-        RestErrorResponseDTO response = new RestErrorResponseDTO("CEP inválido.", status, stackTrace);
+        RestErrorResponseDTO response = new RestErrorResponseDTO("CEP inválido.", status);
         return ResponseEntity.status(status).body(response);
     }
 
@@ -39,10 +38,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CepVazioException.class)
     public ResponseEntity<RestErrorResponseDTO> handlerCepVazio(CepVazioException ex) {
         HttpStatus status = HttpStatus.NOT_FOUND;
-        String stackTrace = Arrays.stream(ex.getStackTrace())
-                .map(StackTraceElement::toString)
-                .collect(Collectors.joining("\n"));
-        RestErrorResponseDTO response = new RestErrorResponseDTO("CEP Vazio.", status, stackTrace);
+        RestErrorResponseDTO response = new RestErrorResponseDTO("CEP Vazio.", status);
         return ResponseEntity.status(status).body(response);
     }
 
@@ -54,10 +50,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoResourceFoundException.class)
     public ResponseEntity<RestErrorResponseDTO> handlerRotaNaoEncontrada(NoResourceFoundException ex) {
         HttpStatus status = HttpStatus.NOT_FOUND;
-        String stackTrace = Arrays.stream(ex.getStackTrace())
-                .map(StackTraceElement::toString)
-                .collect(Collectors.joining("\n"));
-        RestErrorResponseDTO response = new RestErrorResponseDTO("NOT_FOUND", status, stackTrace);
+        RestErrorResponseDTO response = new RestErrorResponseDTO("NOT_FOUND", status);
+        return ResponseEntity.status(status).body(response);
+    }
+
+    @ExceptionHandler({ FeignException.class, FeignClientException.class })
+    public ResponseEntity<RestErrorResponseDTO> handleFeignException(final FeignException ex) {
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        RestErrorResponseDTO response = new RestErrorResponseDTO(ex.getMessage(), status);
         return ResponseEntity.status(status).body(response);
     }
 
@@ -69,10 +69,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<RestErrorResponseDTO> handlerExcpetionGeneric(Exception ex) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        String stackTrace = Arrays.stream(ex.getStackTrace())
-                .map(StackTraceElement::toString)
-                .collect(Collectors.joining("\n"));
-        RestErrorResponseDTO response = new RestErrorResponseDTO("Erro interno do servidor.", status, stackTrace);
+        RestErrorResponseDTO response = new RestErrorResponseDTO("Erro interno do servidor.", status);
         return ResponseEntity.status(status).body(response);
     }
 }
