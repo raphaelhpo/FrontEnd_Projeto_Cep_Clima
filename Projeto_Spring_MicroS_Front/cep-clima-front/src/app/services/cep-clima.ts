@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CepClimaResponse } from '../models/cep-clima';
 import { environment } from '../../environments/environment';
-
+/// Serviço para buscar informações de clima com base no CEP
 @Injectable({
   providedIn: 'root'
 })
