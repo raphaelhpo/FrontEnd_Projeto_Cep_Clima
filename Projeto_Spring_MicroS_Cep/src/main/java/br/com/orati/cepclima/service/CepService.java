@@ -133,7 +133,6 @@ public class CepService {
                         salvarNoBanco(cepApi.toEntity());
                         return cepApi;
                     });
-            System.err.println(buscarDadosCepApi(cepDTO));
             return this.mapperResponseDTO(dadosCep, buscarDadosClimaApi(dadosCep));
         } catch (FeignException e) {
             System.err.println("Erro na API Externa: " + e.contentUTF8());
