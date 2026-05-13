@@ -14,6 +14,6 @@ export class CepClimaService {
   constructor(private http: HttpClient) { }
 
   buscarCepClima(cep: string): Observable<CepClimaResponse> {
-    return this.http.post<CepClimaResponse>(`${this.apiUrl}/api/cep/${cep}`, {});
+    return this.http.get<CepClimaResponse>(`${this.apiUrl}/api/cep/${cep}`, {});
   }
 }
