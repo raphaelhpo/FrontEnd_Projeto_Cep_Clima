@@ -4,8 +4,8 @@ export interface CepModel {
     bairro: string;
     latitude: string;
     longitude: string;
-    CidadeModel: CidadeModel;
-    EstadoModel: EstadoModel;
+    cidade: CidadeModel;
+    estado: EstadoModel;
 }
 
 export interface CidadeModel {
